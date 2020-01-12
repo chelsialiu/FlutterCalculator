@@ -85,7 +85,7 @@ class HomePageState extends State<HomePage>{
 
 Widget _button (String number){ // Creating a method of return type Widget with number and function f as a param
   return MaterialButton(
-    height: 100.0,
+    height: 50.0,
     child: Text(number,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0)),
     textColor: Colors.black,
