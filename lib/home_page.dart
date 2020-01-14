@@ -35,7 +35,21 @@ class HomePageState extends State<HomePage>{
       }
 
       num1 = '0';
-    })
+    });
+  }
+
+  void _multiply() {
+    setState(() {
+      operation = '*';
+      if (equalsFlag == 0) {
+        num2 = num1;
+      }
+      else {
+        num2 = ansStr;
+      }
+
+      num1 = '0';
+    });
   }
 
   @override
@@ -78,7 +92,7 @@ class HomePageState extends State<HomePage>{
                 _button("7"), // Using custom widget _button
                 _button("8"),
                 _button("9"),
-                _button("*")
+                _button("*", _multiply)
               ],
             ),
             Row(
