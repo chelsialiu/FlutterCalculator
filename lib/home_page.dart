@@ -52,6 +52,20 @@ class HomePageState extends State<HomePage>{
     });
   }
 
+  void _divide() {
+    setState(() {
+      operation = '/';
+      if (equalsFlag == 0) {
+        num2 = num1;
+      }
+      else {
+        num2 = ansStr;
+      }
+
+      num1 = '0';
+    });
+  }
+
   @override
   Widget build (BuildContext context) {
     return new Scaffold( // Provides APIs for showing App Bar, Drawers, Bottom Navigation, etc.
@@ -83,7 +97,7 @@ class HomePageState extends State<HomePage>{
                 _button("C"), // Using custom widget _button
                 _button("()"),
                 _button("%"),
-                _button("/")
+                _button("/", _divide)
               ],
             ),
             Row(
