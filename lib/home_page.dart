@@ -7,13 +7,13 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage>{
   // Initialize all variables
-  var num1 = '0', num2 = '0', ansStr = '0', ans = 0, operation = '', firstInOperation = 0;
+  var num1 = '0', num2 = '0', ansStr = '0', ans = 0, operation = '', equalsFlag = 0;
 
   // Operation (+, -, *, /) functions
   void _add(){
     setState((){
       operation = '+';
-      if (firstInOperation == 0) { // First number in the operation
+      if (equalsFlag == 0) { // If the '=' button has not been pressed yet
         num2 = num1;
       }
       else {
@@ -22,6 +22,20 @@ class HomePageState extends State<HomePage>{
 
       num1 = '0';
     });
+  }
+
+  void _subtract() {
+    setState(() {
+      operation = '-';
+      if (equalsFlag == 0) {
+        num2 = num1;
+      }
+      else {
+        num2 = ansStr;
+      }
+
+      num1 = '0';
+    })
   }
 
   @override
@@ -73,17 +87,13 @@ class HomePageState extends State<HomePage>{
                 _button("4"), // Using custom widget _button
                 _button("5"),
                 _button("6"),
-                _button("-")
+                _button("-", _subtract)
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: _button("1"),
-                ),
-                 // Using custom widget _button
+                _button("1"), // Using custom widget _button
                 _button("2"),
                 _button("3"),
                 _button("+", _add)
