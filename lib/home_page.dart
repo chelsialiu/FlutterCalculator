@@ -9,7 +9,7 @@ class HomePageState extends State<HomePage>{
   // Initialize all variables
   var num1 = '0', num2 = '0', ansStr = '0', ans = 0, operation = '', equalsFlag = 0;
 
-  // Operation (+, -, *, /, clear) functions
+  // Operation (+, -, *, /, =, clear) functions
   void _add(){
     setState((){
       operation = '+';
@@ -63,6 +63,28 @@ class HomePageState extends State<HomePage>{
       }
 
       num1 = '0';
+    });
+  }
+
+  void _equals() {
+    setState(() {
+      if(operation =='+'){
+        ans = int.parse(num1)+int.parse(num2);
+        equalsFlag++;
+      }
+      else if(operation == '-'){
+        ans = int.parse(num2)-int.parse(num1);
+        equalsFlag++;
+      }
+      else if(operation == '*'){
+        ans = int.parse(num2)*int.parse(num1);
+        equalsFlag++;
+      }
+      else if(operation == '/'){
+        ans = int.parse(num2)~/int.parse(num1);
+        equalsFlag++;
+      }
+      ansStr = "$ans";
     });
   }
 
