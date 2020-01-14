@@ -6,6 +6,24 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage>{
+  // Initialize all variables
+  var num1 = '0', num2 = '0', ansStr = '0', ans = 0, operation = '', firstInOperation = 0;
+
+  // Operation (+, -, *, /) functions
+  void _add(){
+    setState((){
+      operation = '+';
+      if (firstInOperation == 0) { // First number in the operation
+        num2 = num1;
+      }
+      else {
+        num2 = ansStr;
+      }
+
+      num1 = '0';
+    });
+  }
+
   @override
   Widget build (BuildContext context) {
     return new Scaffold( // Provides APIs for showing App Bar, Drawers, Bottom Navigation, etc.
@@ -61,10 +79,14 @@ class HomePageState extends State<HomePage>{
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                _button("1"), // Using custom widget _button
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: _button("1"),
+                ),
+                 // Using custom widget _button
                 _button("2"),
                 _button("3"),
-                _button("+")
+                _button("+", _add)
               ],
             ),
             Row(
@@ -83,24 +105,13 @@ class HomePageState extends State<HomePage>{
   }
 }
 
-Widget _button (String number){ // Creating a method of return type Widget with number and function f as a param
+Widget _button (String number, Function() f){ // Creating a method of return type Widget with number and function f as a param
   return MaterialButton(
-    height: 50.0,
+    height: 100.0,
     child: Text(number,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0)),
+      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0)),
     textColor: Colors.black,
     color: Colors.grey[100],
-    onPressed: null
-  );
+    onPressed: f,
+    );
 }
-
-//Widget _button (String number, Function() f){ // Creating a method of return type Widget with number and function f as a param
-//  return MaterialButton(
-//    height: 100.0,
-//    child: Text(number,
-//      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0)),
-//    textColor: Colors.black,
-//    color: Colors.grey[100],
-//    onPressed: f,
-//    );
-//}
