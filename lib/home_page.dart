@@ -9,7 +9,7 @@ class HomePageState extends State<HomePage>{
   // Initialize all variables
   var num1 = '0', num2 = '0', ansStr = '0', ans = 0, operation = '', equalsFlag = 0;
 
-  // Operation (+, -, *, /) functions
+  // Operation (+, -, *, /, clear) functions
   void _add(){
     setState((){
       operation = '+';
@@ -66,6 +66,12 @@ class HomePageState extends State<HomePage>{
     });
   }
 
+  void _clear() {
+    setState(() {
+      num1 = '0'; num2 = '0'; ansStr = '0'; ans = 0; operation = ''; equalsFlag = 0;
+    });
+  }
+
   @override
   Widget build (BuildContext context) {
     return new Scaffold( // Provides APIs for showing App Bar, Drawers, Bottom Navigation, etc.
@@ -94,19 +100,10 @@ class HomePageState extends State<HomePage>{
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                _button("C"), // Using custom widget _button
-                _button("()"),
-                _button("%"),
-                _button("/", _divide)
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
                 _button("7"), // Using custom widget _button
                 _button("8"),
                 _button("9"),
-                _button("*", _multiply)
+                _button("+", _add)
               ],
             ),
             Row(
@@ -124,16 +121,16 @@ class HomePageState extends State<HomePage>{
                 _button("1"), // Using custom widget _button
                 _button("2"),
                 _button("3"),
-                _button("+", _add)
+                _button("*", _multiply)
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                _button("+/-"), // Using custom widget _button
+                _button("C", _clear), // Using custom widget _button
                 _button("0"),
-                _button("."),
-                _button("=")
+                _button("=", _equals),
+                _button("/", _divide)
               ],
             )
           ],
